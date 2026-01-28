@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
   return (
     <header className="bg-white shadow-md">
       <nav className="container mx-auto flex justify-between items-center  bg-gray-800 py-4 px-6">
-        <Link to="/" className="text-xl font-bold text-amber-50">MyWebsite</Link>
+        <Link to="/" className="text-xl font-bold text-red-700">Eagle Flights</Link>
 
         <ul className="flex space-x-6 text-amber-50">
           <li><Link to="/">Home</Link></li>

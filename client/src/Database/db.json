@@ -1,6 +1,35 @@
 {
 
+"hotel":[{
+       "name":"Zaki",
+       "number":"8656777896",
+       "aaadharno":"1234567890",
+       "checkin":"25-01-2026",
+       "check-out":"28-01-2026",
+       "city":"Bhopal",
+       "people":"2"
+
+},{
+       "name":"Aditya",
+       "number":"7696777896",
+       "aaadharno":"2334567890",
+       "checkin":"28-01-2026",
+       "check-out":"30-01-2026",
+       "city":"Indore",
+       "people":"2"
+
+},{
+       "name":"Deepak",
+       "number":"5796777896",
+       "aaadharno":"8765567897",
+       "checkin":"27-01-2026",
+       "check-out":"29-01-2026",
+       "city":"Sehore",
+       "people":"4"
+
+}
+]
 
 
-    
+
 }
