@@ -68,7 +68,7 @@ const Footer = () => {
 
       {/* Bottom Line */}
       <div className="border-t text-center py-4 text-gray-500 text-sm">
-        © 2026 FlyNow. All rights reserved.
+        © 2026 EagleFlights. All rights reserved.
       </div>
     </footer>
   

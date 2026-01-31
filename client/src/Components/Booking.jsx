@@ -11,7 +11,9 @@ function Booking() {
     travelClass: "Economy",
   });
 
-  // 🔹 Load data from localStorage (optional but recommended)
+  const [errors, setErrors] = useState({});
+
+  // 🔹 Load saved data
   useEffect(() => {
     const savedData = localStorage.getItem("bookingData");
     if (savedData) {
@@ -21,12 +23,45 @@ function Booking() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
 
-  // ✅ SAVE DATA HERE
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!form.from.trim()) {
+      newErrors.from = "From location is required";
+    }
+
+    if (!form.to.trim()) {
+      newErrors.to = "To location is required";
+    }
+
+    if (form.from && form.to && form.from === form.to) {
+      newErrors.to = "From and To cannot be same";
+    }
+
+    if (!form.departure) {
+      newErrors.departure = "Departure date is required";
+    }
+
+    if (form.return && form.departure && form.return < form.departure) {
+      newErrors.return = "Return date cannot be before departure";
+    }
+
+    if (form.travellers < 1) {
+      newErrors.travellers = "At least 1 traveller required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = () => {
+    if (!validateForm()) return;
+
     localStorage.setItem("bookingData", JSON.stringify(form));
-    alert("Booking Confirmed");
+    alert("Booking Confirmed ✅");
   };
 
   const swapCities = () => {
@@ -35,30 +70,10 @@ function Booking() {
 
   return (
     <div className="w-full bg-white shadow-md rounded-xl p-6">
-      {/* TRIP TYPE */}
-      <div className="flex items-center gap-6 mb-4 text-sm">
-        {/* <label className="flex items-center gap-2 cursor-pointer">
-          <input type="radio" name="trip" />
-          One Way
-        </label>
-
-        <label className="flex items-center gap-2 cursor-pointer font-semibold">
-          <input type="radio" name="trip" defaultChecked />
-          Round Trip
-        </label>
-
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input type="radio" name="trip" />
-          Multi City
-        </label> */}
-
-        <span className="ml-auto text-gray-600">
-          Book International and Domestic Flights
-        </span>
-      </div>
 
       {/* SEARCH BAR */}
       <div className="grid grid-cols-5 border rounded-xl overflow-hidden">
+
         {/* FROM */}
         <div className="p-4 border-r">
           <p className="text-xs text-gray-500">From</p>
@@ -68,7 +83,9 @@ function Booking() {
             onChange={handleChange}
             className="text-2xl font-bold w-full outline-none"
           />
-          <p className="text-xs text-gray-400">City or Airport</p>
+          {errors.from && (
+            <p className="text-red-500 text-xs">{errors.from}</p>
+          )}
         </div>
 
         {/* SWAP */}
@@ -90,10 +107,12 @@ function Booking() {
             onChange={handleChange}
             className="text-2xl font-bold w-full outline-none"
           />
-          <p className="text-xs text-gray-400">City or Airport</p>
+          {errors.to && (
+            <p className="text-red-500 text-xs">{errors.to}</p>
+          )}
         </div>
 
-        {/* DEPART & RETURN */}
+        {/* DATES */}
         <div className="grid grid-cols-2 border-r">
           <div className="p-4 border-r">
             <p className="text-xs text-gray-500">Departure</p>
@@ -104,6 +123,9 @@ function Booking() {
               onChange={handleChange}
               className="font-semibold outline-none w-full"
             />
+            {errors.departure && (
+              <p className="text-red-500 text-xs">{errors.departure}</p>
+            )}
           </div>
 
           <div className="p-4">
@@ -115,6 +137,9 @@ function Booking() {
               onChange={handleChange}
               className="font-semibold outline-none w-full"
             />
+            {errors.return && (
+              <p className="text-red-500 text-xs">{errors.return}</p>
+            )}
           </div>
         </div>
 
@@ -124,11 +149,15 @@ function Booking() {
           <input
             type="number"
             min="1"
+            max="10"
             name="travellers"
             value={form.travellers}
             onChange={handleChange}
             className="text-xl font-bold w-full outline-none"
           />
+          {errors.travellers && (
+            <p className="text-red-500 text-xs">{errors.travellers}</p>
+          )}
 
           <select
             name="travelClass"
@@ -146,7 +175,7 @@ function Booking() {
 
       <button
         onClick={handleSubmit}
-        className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg cursor-pointer"
+        className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg"
       >
         Book
       </button>
