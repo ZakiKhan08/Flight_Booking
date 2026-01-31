@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen bg-cover bg-center from-white to-gray-100 overflow-hidden ">
 
-<div style={{ width: '100%', height: '700px', position: 'relative', backgroundImage: "url('/Eagle_Plane4.png')" }}>
+<div style={{ width: '100%', height: '700px', position: 'relative', backgroundImage: "url(Eagle_Plane4.png)" }}>
 
 
       <div className="container mx-auto px-36 py-20 grid md:grid-cols-2 items-center gap-10">

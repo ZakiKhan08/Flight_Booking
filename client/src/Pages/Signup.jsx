@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import RippleGrid from "../lib/RippleGrid";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -59,12 +60,19 @@ const Signup = () => {
     alert("Signup successful 🎉");
 
     // Redirect to login page
-    navigate("/");
+    navigate("/login");
   };
 
   return (
+    
     <div className="max-h-screen p-12 flex items-center justify-center bg-gradient-to-b from-green-500 to-blue-400">
       <div className="bg-white p-1 rounded-2xl shadow-lg w-full max-w-md">
+      
+      {/* RippleGrid */}
+      {/* <div className="">
+       <RippleGrid />
+
+      </div> */}
 
         {/* Title */}
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
